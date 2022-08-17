@@ -1,0 +1,22 @@
+SELECT TOP 1000 [BSC]
+,[CI]
+,[SAC]
+,[LAC]
+,[RAC]
+,[Site Name]
+,[Azimuth]
+,[N]
+,[E]
+,[Tilt]
+,[BSIC]
+,[Channel]
+,[PCI]
+,[RSI]
+,CASE WHEN [BCCH] =1
+THEN 'ИСТИНА'
+ELSE 'ЛОЖЬ'
+END [BCCH]
+,[Id_Site]
+FROM [rpdb].[dbo].[vExpSiemensFP]
+where [Site Name] like '{{bs_name_input}}_%' and [Channel] in (10712, 10737, 10762, 10662)
+ORDER BY [SAC] ASC, [CI] ASC, [BCCH] ASC

@@ -1,0 +1,9 @@
+SELECT dbo.SitesName.NamePoint, dbo.N_Vendor.Name AS N_Vendor, dbo.vBCF_TOTAL.BS_Cluster, dbo.vBCF_TOTAL.BS_OAM_IP, 
+	   dbo.vBCF_TOTAL.BS_OAM_Mask, dbo.vBCF_TOTAL.BS_OAM_DG, dbo.vBCF_TOTAL.BS_OAM_VLAN_ID, dbo.vBCF_TOTAL.BS_Port_SFP, 
+	   dbo.vBCF_TOTAL.[2G_ID], dbo.vBCF_TOTAL.[2G_BSC], dbo.vBCF_TOTAL.[2G_BS_Name], dbo.vBCF_TOTAL.[2G_Abis_DG], 
+	   dbo.vBCF_TOTAL.[2G_Abis_IP], dbo.vBCF_TOTAL.[2G_Abis_Mask], dbo.vBCF_TOTAL.[2G_Abis_VLAN_ID], dbo.vBCF_TOTAL.[3G_ID], 
+	   dbo.vBCF_TOTAL.[3G_RNC], dbo.vBCF_TOTAL.[3G_BS_Name], dbo.vBCF_TOTAL.[3G_BS_SCTP], dbo.vBCF_TOTAL.[3G_Iub_DG], 
+       dbo.vBCF_TOTAL.[3G_Iub_IP], dbo.vBCF_TOTAL.[3G_Iub_Mask], dbo.vBCF_TOTAL.[3G_Iub_VLAN_ID]
+FROM   dbo.SitesName INNER JOIN dbo.vBCF_TOTAL ON dbo.SitesName.KeyPoint = dbo.vBCF_TOTAL.BS_Site_ID 
+	   INNER JOIN dbo.N_Vendor ON dbo.vBCF_TOTAL.BS_Vendor_ID = dbo.N_Vendor.[Key]
+WHERE  dbo.SitesName.NamePoint = '{{bs_name_input}}' and dbo.vBCF_TOTAL.[3G_ID] > 1
