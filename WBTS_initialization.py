@@ -41,7 +41,7 @@ class WBTS:
 
         # первый блок
         managedObject = ET.SubElement(cmData, 'managedObject', cls_1, version='mcRNC17', distName=
-        f'PLMN-PLMN/RNC-{self.WBTS_RNC}/IP-1/IPBR={self.ipbr_num}',
+        f'PLMN-PLMN/RNC-{self.WBTS_RNC}/IP-1/IPBR-{self.ipbr_num}',
                                       operation='create')
         p_name = ET.SubElement(managedObject, 'p', name='committedBW')
         p_name.text = '100000'
