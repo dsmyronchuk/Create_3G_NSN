@@ -5,6 +5,7 @@ import os
 from jinja2 import Template
 from WBTS_initialization import WBTS
 from WCELL_initialization import WCELL
+from data_file import resource_path
 from secret import *
 
 
@@ -16,8 +17,9 @@ name_folder = f'{bs_name_input}___{datetime.date.today()}'
 connect_rp_db = pyodbc.connect(rpdb_sql)
 connect_ts_db = pyodbc.connect(ts_sql)
 
-query_rpdb = Template(open('template/SQL_rpdb.txt', encoding='utf-8').read()).render(bs_name_input=bs_name_input)
-query_tsdb = Template(open('template/SQL_ts.txt').read()).render(bs_name_input=bs_name_input.replace('_', ' '))
+temp_folder = resource_path('template')     # функция для pyinstaller
+query_rpdb = Template(open(temp_folder + '/SQL_rpdb.txt', encoding='utf-8').read()).render(bs_name_input=bs_name_input)
+query_tsdb = Template(open(temp_folder + '/SQL_ts.txt').read()).render(bs_name_input=bs_name_input.replace('_', ' '))
 
 rpdb_bd = pd.read_sql(query_rpdb, connect_rp_db)
 bcf_file = pd.read_sql(query_tsdb, connect_ts_db)

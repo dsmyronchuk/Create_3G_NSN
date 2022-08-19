@@ -10,8 +10,6 @@ SELECT TOP 1000 [BSC]
 ,[Tilt]
 ,[BSIC]
 ,[Channel]
-,[PCI]
-,[RSI]
 ,CASE WHEN [BCCH] =1
 THEN 'ИСТИНА'
 ELSE 'ЛОЖЬ'

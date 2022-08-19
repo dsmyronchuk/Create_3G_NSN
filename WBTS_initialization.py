@@ -10,14 +10,14 @@ class WBTS:
         self.OAM_IP = row[3]
         self.OAM_Mask = row[4]
         self.OAM_DG = row[5]
-        self.OAM_VLAN = int(row[6])
+    #    self.OAM_VLAN = int(row[6])
         self.WBTS_ID = int(row[15])
         self.WBTS_RNC = int(row[16])
         self.WBTS_BS_SCTP = int(row[18])
         self.WBTS_Iub_DG = row[19]
         self.WBTS_Iub_IP = row[20]
         self.WBTS_Iub_Mask = row[21]
-        self.WBTS_Iub_VLAN_ID = int(row[22])
+    #    self.WBTS_Iub_VLAN_ID = int(row[22])
         self.ipbr_num = self.calculate_ipbr_nub()
 
         self.ipbr_xml()                      # Вызываю функцию создания IPBR
@@ -41,7 +41,7 @@ class WBTS:
 
         # первый блок
         managedObject = ET.SubElement(cmData, 'managedObject', cls_1, version='mcRNC17', distName=
-        f'PLMN-PLMN/RNC-{self.WBTS_RNC}/IP-1/IPBR={self.ipbr_num}',
+        f'PLMN-PLMN/RNC-{self.WBTS_RNC}/IP-1/IPBR-{self.ipbr_num}',
                                       operation='create')
         p_name = ET.SubElement(managedObject, 'p', name='committedBW')
         p_name.text = '100000'
@@ -63,15 +63,15 @@ class WBTS:
         p_name.text = '30'
         p_name = ET.SubElement(managedObject, 'p', name='phbProfileID')
         p_name.text = '0'
-        p_name = ET.SubElement(managedObject, 'p', name='RemoteMuxUDPPort')
+        p_name = ET.SubElement(managedObject, 'p', name='remoteMuxUDPPort')
         p_name.text = '65535'
         p_name = ET.SubElement(managedObject, 'p', name='routeBW')
         p_name.text = '1000000'
         p_name = ET.SubElement(managedObject, 'p', name='schedulerType')
         p_name.text = '0'
-        p_name = ET.SubElement(managedObject, 'p', name='updMuxDSCP')
+        p_name = ET.SubElement(managedObject, 'p', name='udpMuxDSCP')
         p_name.text = '46'
-        p_name = ET.SubElement(managedObject, 'p', name='updMuxEnabled')
+        p_name = ET.SubElement(managedObject, 'p', name='udpMuxEnabled')
         p_name.text = '0'
 
         # Второй блок ( для каждого QNUP )

@@ -71,7 +71,7 @@ class WCELL:
         # словари нужны потому что в managedObject не принимает слово class напрямую
         cls_ipnb = {'class': 'IPNB'}
         cls_wbts = {'class': 'WBTS'}
-        cls_wcell = {'class': 'WCELL'}
+        cls_wcell = {'class': 'WCEL'}
         cls_adjl = {'class': 'ADJL'}
 
         new = ET.Element('raml', version='2.0', xmlns='raml20.xsd')  # 3 строка
@@ -358,22 +358,22 @@ class WCELL:
         for i in lst_wcell:
             # расчёт доп параметров
             if lst_wcell.index(i) + 1 in (1, 2, 3):
-                tcell = '0'
+                Tcell = '0'
                 sector_id = '1'
             elif lst_wcell.index(i) + 1 in (4, 5, 6):
-                tcell = '3'
+                Tcell = '3'
                 sector_id = '2'
             elif lst_wcell.index(i) + 1 in (7, 8, 9):
-                tcell = '1'
+                Tcell = '1'
                 sector_id = '3'
             elif lst_wcell.index(i) + 1 in (10, 11, 12):
-                tcell = '4'
+                Tcell = '4'
                 sector_id = '4'
             elif lst_wcell.index(i) + 1 in (13, 14, 15):
-                tcell = '2'
+                Tcell = '2'
                 sector_id = '5'
             elif lst_wcell.index(i) + 1 in (16, 17, 18):
-                tcell = '5'
+                Tcell = '5'
                 sector_id = '6'
 
             pwsmshutdownOrder = '0'
@@ -496,14 +496,14 @@ class WCELL:
             p_name.text = '55'
             p_name = ET.SubElement(managedObject, 'p', name='SIB12Length')
             p_name.text = '23'
-            p_name = ET.SubElement(managedObject, 'p', name='tcell')
-            p_name.text = tcell
+            p_name = ET.SubElement(managedObject, 'p', name='Tcell')
+            p_name.text = Tcell
             p_name = ET.SubElement(managedObject, 'p', name='ToAWE_CCH')
             p_name.text = '10'
             p_name = ET.SubElement(managedObject, 'p', name='ToAWS_CCH')
             p_name.text = '25'
             p_name = ET.SubElement(managedObject, 'p', name='UARFCN')
-            p_name.text = str(i.BCCH)
+            p_name.text = str(i.Channel)
             p_name = ET.SubElement(managedObject, 'p', name='UTRAN_DRX_length')
             p_name.text = '6'
             p_name = ET.SubElement(managedObject, 'p', name='WCELMCC')
@@ -692,7 +692,7 @@ class WCELL:
             p_name.text = '0'
             p_name = ET.SubElement(managedObject, 'p', name='RxDivIndicator')
             p_name.text = '1'
-            p_name = ET.SubElement(managedObject, 'p', name='sector_id')
+            p_name = ET.SubElement(managedObject, 'p', name='SectorID')
             p_name.text = sector_id
             p_name = ET.SubElement(managedObject, 'p', name='SIRDPCCHOffsetEDPCH')
             p_name.text = '0'
@@ -1363,8 +1363,8 @@ class WCELL:
             p_name = ET.SubElement(managedObject, 'p', name='WCDMACellReselection')
             p_name.text = '0'
             l_name = ET.SubElement(managedObject, 'list', name='URAId')
-            l_name.text = '1'
-
+            lst = ET.SubElement(l_name, 'p')
+            lst.text = '1'
 
         # Create HO 3G > LTE
         for i in lst_wcell:
