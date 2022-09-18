@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import data_file
+import secret
 
 
 class WBTS:
@@ -75,7 +76,7 @@ class WBTS:
         p_name.text = '0'
 
         # Второй блок ( для каждого QNUP )
-        for i in data_file.dct_rnc_ip[self.WBTS_RNC]:  # i[0] - IP, i[1] - Номер QNUP
+        for i in secret.dct_rnc_ip[self.WBTS_RNC]:  # i[0] - IP, i[1] - Номер QNUP
             managedObject = ET.SubElement(cmData, 'managedObject', cls_2, version='mcRNC17', distName=
             f'PLMN-PLMN/RNC-{self.WBTS_RNC}/IP-1/OWNER-QNUP-{i[1]}/IPRO-'
             f'{self.ipbr_num}-{i[0]}-lo11', operation='create')
